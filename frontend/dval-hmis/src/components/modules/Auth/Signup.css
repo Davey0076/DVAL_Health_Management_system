@@ -1,0 +1,59 @@
+body{
+    background-color: #CBDCEB;
+}
+
+.signup__container {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.signup__left__container{
+    width: 45vw;
+    padding: 1rem;
+    border-radius: 5px;
+    /* From https://css.glass */
+background: rgba(203, 220, 235, 0.57);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(9.7px);
+-webkit-backdrop-filter: blur(9.7px);
+border: 1px solid rgba(203, 220, 235, 0.38);
+}
+
+#stethoscope, #graph, #doctor, #community {
+    border: 5px solid black;
+    border-radius: 50%;
+    padding: 0.4rem;
+}
+
+.personal-info-form div, .hospital-info-form div{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+}
+
+input{
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.signup__right__container{
+    width: 45vw;
+    padding: 1rem;
+    
+}
+
+.btn-selection-signup{
+    display: flex;
+    gap: 1rem;
+    border: 1px solid gray;
+    width: fit-content;
+    padding: 0.1rem 0rem 0.1rem 0rem;
+    border-radius: 5px;
+}
+
+.btn-selection-signup button:hover{
+    border: none;
+}
