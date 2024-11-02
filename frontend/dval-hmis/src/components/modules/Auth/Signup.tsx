@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Signup.css';
 import stethoscope from '../../../assets/images/icons/stethoscope.png';
 import graph from '../../../assets/images/icons/medical-graph.png';
@@ -8,14 +9,24 @@ import community from '../../../assets/images/icons/community.png';
 type Props = {};
 
 export default function Signup({}: Props) {
+  const navigate = useNavigate(); //for navigation to login after
   const [showPersonalInfo, setShowPersonalInfo] = useState(true);
+  
+  // Personal info state
   const [fullName, setFullName] = useState('');
   const [kra, setKra] = useState('');
   const [nationalid, setNationalid] = useState('');
   const [email, setEmail] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
+
+  // Hospital info state
   const [hospitalName, setHospitalName] = useState('');
+  const [registrationNumber, setRegistrationNumber] = useState('');
   const [hospitalLocation, setHospitalLocation] = useState('');
   const [hospitalType, setHospitalType] = useState('');
+  const [hospitalContactInfo, setHospitalContactInfo] = useState('');
+  
+  // Password state
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
 
@@ -30,41 +41,48 @@ export default function Signup({}: Props) {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    // Basic validation (you'll need more robust validation in a real app)
+    // Basic validation for matching passwords
     if (password !== repeatPassword) {
       alert('Passwords do not match!');
       return;
     }
 
     try {
-      const response = await fetch('/api/signup', {
+      const response = await fetch('http://localhost:5000/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          fullName,
-          kra,
-          nationalid,
+          full_name: fullName,
+          kra_pin: kra,
+          national_id: nationalid,
           email,
-          hospitalName,
-          hospitalLocation,
-          hospitalType,
+          contact_number: contactNumber,
           password,
+
+          // Hospital details
+          hospital_name: hospitalName,
+          registration_number: registrationNumber,
+          location: hospitalLocation,
+          type: hospitalType,
+          contact_info: hospitalContactInfo
         }),
       });
 
       if (response.ok) {
-        // Handle successful signup (e.g., redirect to login page)
         console.log('Signup successful!');
+        alert('Signup successful. Redirecting to login')
+        navigate('/login')
+        // Redirect to login page or show success message
       } else {
         const errorData = await response.json();
         console.error('Signup failed:', errorData);
-        // Handle signup error (e.g., display error message)
+        alert(`Signup failed: ${errorData.message}`);
       }
     } catch (error) {
       console.error('Error during signup:', error);
-      // Handle network or other errors
+      alert('An error occurred during signup. Please try again later.');
     }
   };
 
@@ -94,11 +112,10 @@ export default function Signup({}: Props) {
           <button onClick={handlePersonalInfoClick}>
             1. Personal Information
           </button>
-          <button onClick={handleHospitalInfoClick}>2.Hospital Information</button>
+          <button onClick={handleHospitalInfoClick}>2. Hospital Information</button>
         </div>
 
         <form onSubmit={handleSubmit}>
-          {/* Wrap the form around both sections */}
           {showPersonalInfo ? (
             <div className="personal-info-form">
               <h2>Personal Details</h2>
@@ -146,7 +163,17 @@ export default function Signup({}: Props) {
                   required
                 />
               </div>
-              {/* ... other personal information fields ... */}
+              <div>
+                <label htmlFor="contactNumber">Contact Number:</label>
+                <input
+                  type="text"
+                  id="contactNumber"
+                  name="contactNumber"
+                  value={contactNumber}
+                  onChange={(e) => setContactNumber(e.target.value)}
+                  required
+                />
+              </div>
             </div>
           ) : (
             <div className="hospital-info-form">
@@ -159,6 +186,17 @@ export default function Signup({}: Props) {
                   name="hospitalName"
                   value={hospitalName}
                   onChange={(e) => setHospitalName(e.target.value)}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="registrationNumber">Registration Number:</label>
+                <input
+                  type="text"
+                  id="registrationNumber"
+                  name="registrationNumber"
+                  value={registrationNumber}
+                  onChange={(e) => setRegistrationNumber(e.target.value)}
                   required
                 />
               </div>
@@ -185,6 +223,17 @@ export default function Signup({}: Props) {
                 />
               </div>
               <div>
+                <label htmlFor="hospitalContactInfo">Hospital Contact Info:</label>
+                <input
+                  type="text"
+                  id="hospitalContactInfo"
+                  name="hospitalContactInfo"
+                  value={hospitalContactInfo}
+                  onChange={(e) => setHospitalContactInfo(e.target.value)}
+                  required
+                />
+              </div>
+              <div>
                 <label htmlFor="password">Password:</label>
                 <input
                   type="password"
@@ -206,12 +255,10 @@ export default function Signup({}: Props) {
                   required
                 />
               </div>
-              {/* ... other hospital information fields ... */}
             </div>
           )}
-            <p>By signing up, you automatically accept terms and conditions of using our platform</p>
+          <p>By signing up, you automatically accept terms and conditions of using our platform</p>
           <button type="submit">Register</button>
-          {/* Submit button outside the conditional rendering */}
         </form>
       </div>
     </div>
