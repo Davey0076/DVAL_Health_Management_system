@@ -1,12 +1,13 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const pool = require('../config/db'); // Database connection pool
+const pool = require('../config/db'); // Database connection pool, orm
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret'; // Store this securely in .env
+const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret'; 
 
 // Controller for user signup (Admin and Hospital registration)
 const signup = async (req, res) => {
   const {
+    //personal details
     full_name,
     email,
     password,
@@ -60,7 +61,7 @@ const signup = async (req, res) => {
   }
 };
 
-// Controller for user login
+
 const login = async (req, res) => {
   const { email, password } = req.body;
 
