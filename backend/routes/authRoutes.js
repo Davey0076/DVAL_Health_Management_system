@@ -3,7 +3,7 @@ const { signup, login } = require('../controllers/authController');
 
 const router = express.Router();
 
-// Signup route - registers both admin and hospital details
+
 router.post('/signup', signup);
 
 // Login route
