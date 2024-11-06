@@ -14,6 +14,7 @@ export default function Login({}: Props) {
     event.preventDefault();
   
     try {
+      //login route used during login
       const response = await fetch('http://localhost:5000/auth/login', {
         method: 'POST',
         headers: {
@@ -26,18 +27,24 @@ export default function Login({}: Props) {
       });
   
       if (response.ok) {
-        // Try to parse JSON; handle empty response safely
+        // parse json response and then in case its empty catch the error
         const data = await response.json().catch(() => null);
         if (data && data.token) {
-          alert('Login successful!'); // Show success alert
-          localStorage.setItem('token', data.token); // Store JWT token for future use
-          navigate('/dashboard'); // Redirect to the dashboard or another protected route
+          alert('Login successful!');
+          localStorage.setItem('token', data.token); 
+
+          //on successful login, redirect to dashboard
+          //use navigate function to define the redirects
+          navigate('/dashboard');
         } else {
           alert('Login successful, but no token received.');
         }
       } else {
-        // Try to parse error as JSON, or use a fallback message
-        const errorData = await response.json().catch(() => ({ message: 'Login failed. Please try again.' }));
+        
+        const errorData = await response.json().catch(() => ({
+           message: 'Login failed. Please try again.' 
+          })
+        );
         alert(`Login failed: ${errorData.message}`);
       }
     } catch (error) {
@@ -56,7 +63,10 @@ export default function Login({}: Props) {
       {/* form to handle login purposes */}
       <div className="login__right__container">
         <h1 id="main-page-header">DVAL HMIS</h1>
-        <p style={{ fontSize: "0.7rem", fontStyle: "italic" }}>Redefining healthcare through better management</p>
+        <p style={{ fontSize: "0.7rem", fontStyle: "italic" }}>
+          Redefining healthcare through better management
+          </p>
+          
         <h2 id="login-page-header">Login Page</h2>
         
         <form onSubmit={handleSubmit}>

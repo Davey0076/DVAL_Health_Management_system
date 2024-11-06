@@ -1,38 +1,69 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
+
+
 import './Dashboard.css';
 import {
-  FaHome,
-  FaUser,
-  FaFlask,
-  FaCapsules,
-  FaMoneyBillAlt,
-  FaBaby,
-  FaPlus,
   FaBell,
   FaPowerOff,
-  FaUserPlus, // For Register New Patient
-  FaStethoscope, // For New Consultation
-  FaFileMedicalAlt, // For Lab Reports
-  FaCalendarCheck, // For Appointments
-} from 'react-icons/fa';
+  FaUserPlus, 
+  FaStethoscope, 
+  FaFileMedicalAlt,
+  FaCalendarCheck, 
+} from 'react-icons/fa'; //import react-icons library with commonly used icons
 
 type Props = {};
 
 function Dashboard({}: Props) {
-  const navigate = useNavigate(); // Initialize navigation for redirecting
+  const navigate = useNavigate();
+  const [hospitalName, setHospitalName] = useState('');
 
-  // Logout function to clear token and navigate to login
+  // Fetch hospital name on component mount
+  useEffect(() => {
+    const fetchHospitalName = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (token) {
+          // Decode the token to get hospital_id
+          const decodedToken = jwtDecode<{ hospital_id: number }>(token);
+          const hospitalId = decodedToken.hospital_id;
+          console.log(hospitalId)
+
+          // Fetch hospital name using hospital_id of the logged in hospital
+          //the hospital id had been decoded from the jwt token
+          const response = await fetch(`http://localhost:5000/api/hospital/${hospitalId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            setHospitalName(data.hospital_name);
+          } else {
+            console.error('Failed to fetch hospital name');
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching hospital name:', error);
+      }
+    };
+
+    fetchHospitalName();
+  }, []);
+
+  // Logout function 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Clear token from localStorage
-    alert('You have been logged out.'); // Optional logout message
-    navigate('/login'); // Redirect to login page
+    localStorage.removeItem('token'); 
+    alert('You have been logged out.'); 
+    navigate('/login'); 
   };
 
   return (
     <>
       <div className="main-container">
-        {/* side bar for the dashboard, break it down to smaller components later */}
+        {/* side bar for the dashboard*/}
         <div className="side-bar">
           <div className="sidebar-items">
             <p>DVAL HMIS</p>
@@ -41,7 +72,7 @@ function Dashboard({}: Props) {
             </p>
             <ul>
               <li>Dashboard</li>
-              <li>Patient Management</li>
+              <li><Link to="/patient-management">Patient Management</Link></li>
               <li>Lab Department</li>
               <li>Pharmacy/Inventory Management</li>
               <li>Finance</li>
@@ -52,10 +83,11 @@ function Dashboard({}: Props) {
             </ul>
           </div>
         </div>
-        {/* main body */}
+
+        {/* main body container with navbar and other dashboard features*/}
         <div className="main-section">
           <div className="navbar">
-            <p id="hospitalName">Hospital name</p>
+          <p id="hospitalName">{hospitalName || 'Loading...'}</p>
             <div className="navbar-btn-section">
               <button>Notifications <FaBell /></button>
               <button onClick={handleLogout}><FaPowerOff /> Logout</button>
@@ -63,6 +95,7 @@ function Dashboard({}: Props) {
           </div>
           <hr style={{ width: '100%', color: 'gray' }} />
           <div className="main-body">
+
             {/* frequent services section */}
             <div className="frequent-services">
               <h2>Frequent Services</h2>
@@ -87,7 +120,7 @@ function Dashboard({}: Props) {
               </div>
             </div>
 
-            {/* statistics section */}
+            {/* statistics section, more implementation of this will be done later, with visualizations such as graphs */}
             <div className="statistics-section">
               <h2>Statistics</h2>
               <div className="patient-count-card">

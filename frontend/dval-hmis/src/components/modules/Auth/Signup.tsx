@@ -9,27 +9,28 @@ import community from '../../../assets/images/icons/community.png';
 type Props = {};
 
 export default function Signup({}: Props) {
-  const navigate = useNavigate(); //for navigation to login after
+  const navigate = useNavigate(); 
   const [showPersonalInfo, setShowPersonalInfo] = useState(true);
   
-  // Personal info state
+  // Personal information states for the hospital admin
   const [fullName, setFullName] = useState('');
   const [kra, setKra] = useState('');
   const [nationalid, setNationalid] = useState('');
   const [email, setEmail] = useState('');
   const [contactNumber, setContactNumber] = useState('');
 
-  // Hospital info state
+  // Hospital information states for hospital being registered
   const [hospitalName, setHospitalName] = useState('');
   const [registrationNumber, setRegistrationNumber] = useState('');
   const [hospitalLocation, setHospitalLocation] = useState('');
   const [hospitalType, setHospitalType] = useState('');
   const [hospitalContactInfo, setHospitalContactInfo] = useState('');
   
-  // Password state
+  // use states for password and repeat password
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
 
+  
   const handlePersonalInfoClick = () => {
     setShowPersonalInfo(true);
   };
@@ -41,13 +42,14 @@ export default function Signup({}: Props) {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    // Basic validation for matching passwords
+   
     if (password !== repeatPassword) {
       alert('Passwords do not match!');
       return;
     }
 
     try {
+      //use signup routes that were defined for signinng up
       const response = await fetch('http://localhost:5000/auth/signup', {
         method: 'POST',
         headers: {
@@ -61,7 +63,7 @@ export default function Signup({}: Props) {
           contact_number: contactNumber,
           password,
 
-          // Hospital details
+          
           hospital_name: hospitalName,
           registration_number: registrationNumber,
           location: hospitalLocation,
@@ -73,8 +75,7 @@ export default function Signup({}: Props) {
       if (response.ok) {
         console.log('Signup successful!');
         alert('Signup successful. Redirecting to login')
-        navigate('/login')
-        // Redirect to login page or show success message
+        navigate('/login')//redirect to login on successful signup
       } else {
         const errorData = await response.json();
         console.error('Signup failed:', errorData);
