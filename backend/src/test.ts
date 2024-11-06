@@ -1,7 +1,8 @@
-const pool = require('./config/db');
+import pool from './config/db';
+import { PoolClient } from 'pg';
 
-async function addAdminAndHospital() {
-  const client = await pool.connect();
+async function addAdminAndHospital(): Promise<void> {
+  const client: PoolClient = await pool.connect();
 
   try {
     await client.query('BEGIN');
@@ -15,7 +16,7 @@ async function addAdminAndHospital() {
       ) RETURNING admin_id;
     `;
     const adminResult = await client.query(adminQuery);
-    const adminId = adminResult.rows[0].admin_id;
+    const adminId: number = adminResult.rows[0].admin_id;
 
     // Step 2: Insert into Hospital
     const hospitalQuery = `
@@ -26,7 +27,7 @@ async function addAdminAndHospital() {
       ) RETURNING hospital_id;
     `;
     const hospitalResult = await client.query(hospitalQuery, [adminId]);
-    const hospitalId = hospitalResult.rows[0].hospital_id;
+    const hospitalId: number = hospitalResult.rows[0].hospital_id;
 
     // Step 3: Update Admin to set hospital_id
     const updateAdminQuery = `
@@ -38,9 +39,10 @@ async function addAdminAndHospital() {
 
     await client.query('COMMIT');
     console.log('Admin and Hospital added successfully');
-  } catch (err) {
+  } catch (err: unknown) {
     await client.query('ROLLBACK');
-    console.error('Error adding Admin and Hospital:', err.message);
+    const error = err as Error;
+    console.error('Error adding Admin and Hospital:', error.message);
   } finally {
     client.release();
   }
