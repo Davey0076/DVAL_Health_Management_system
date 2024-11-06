@@ -95,26 +95,22 @@ export const getAllPatients = async (req: Request, res: Response): Promise<void>
     try {
       let query = `SELECT patient_id, first_name, last_name, date_of_birth, gender, contact_info, age FROM patients WHERE 1=1`;
       const values: Array<string | number> = [];
+      
   
       if (name) {
-        query += ` WHERE first_name ILIKE $1 OR last_name ILIKE $1`;
-        values.push(`%${name}%`);
-        console.log(values)
+        query += ` AND (first_name ILIKE $${values.length + 1} OR last_name ILIKE $${values.length + 1})`;
+        values.push(`${name}`);
+
+       
       }
-
-      // Age Filter
       if (age) {
-        query += ` WHERE age = $${values.length + 1}`;
-        values.push(age);
-        console.log(values)
-    }
-
-    // Gender Filter
-    if (gender) {
+        query += ` AND EXTRACT(YEAR FROM age(date_of_birth)) = $${values.length + 1}`;
+        values.push(Number(age));
+      }
+      if (gender) {
         query += ` AND gender = $${values.length + 1}`;
         values.push(gender);
-    }
-
+      }
   
       const result = await pool.query(query, values);
       res.status(200).json(result.rows);
