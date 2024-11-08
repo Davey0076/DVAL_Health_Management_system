@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import PatientList from './PatientList';
-import PatientDetails from './PatientDetails';
+import PatientList from './PatientList.component';
+import PatientDetails from './PatientDetails.component';
 import './PatientManagementPage.css'
 
 

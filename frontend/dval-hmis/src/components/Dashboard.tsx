@@ -76,7 +76,7 @@ function Dashboard({}: Props) {
               <li>Lab Department</li>
               <li>Pharmacy/Inventory Management</li>
               <li>Finance</li>
-              <li>Appointments</li>
+              <li><Link to='/all-appointments'>Appointments</Link></li>
               <li>Maternity and Ward Section</li>
               <li>Staff</li>
               <li>Additional Services</li>
