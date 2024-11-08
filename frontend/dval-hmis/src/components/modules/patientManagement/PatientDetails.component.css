@@ -1,0 +1,55 @@
+/* Container for entire Patient Details section */
+.patient-details-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 1rem;
+    /* border:1px solid black; */
+  }
+  
+  
+  .service-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+ 
+  
+  .service-card:hover {
+    background-color: #ffffff;
+    color: #333;
+  }
+  
+  .service-card svg {
+    font-size: 1.8em;
+    margin-bottom: 8px;
+  }
+  
+  /* Patient details styling */
+  .patient-details {
+    flex-grow: 1;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  .patient-details h2 {
+    color: #333;
+    font-size: 1.5rem;
+  }
+  
+  .patient-details p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .patient-details p strong {
+    font-weight: 600;
+    color: #333;
+  }
+  

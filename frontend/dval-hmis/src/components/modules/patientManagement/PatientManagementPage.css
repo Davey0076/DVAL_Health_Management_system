@@ -1,0 +1,25 @@
+.patient-management-page {
+    padding: 1rem;
+  }
+  
+  .tab-navigation {
+    margin-bottom: 1rem;
+  }
+  
+  .patient-list table {
+    width: 100%;
+    border-collapse: collapse;
+    
+  }
+  
+  .patient-list table, .patient-list th, .patient-list td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .patient-details p {
+    margin: 0.5rem 0;
+  }
+
+  
+  

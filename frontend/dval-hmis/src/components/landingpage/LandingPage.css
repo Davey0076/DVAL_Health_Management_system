@@ -1,0 +1,487 @@
+html {
+    scroll-behavior: smooth;
+  }
+  
+
+/* Overall Landing Page Container */
+.landing-page-container {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+}
+
+/* Navbar Styling */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-logo img {
+    width: 10vw;
+    height: auto;
+}
+
+.nav-options {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-login-register {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-options button, .nav-login-register button {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.nav-login-register button {
+    background-color: black;
+    color: white;
+}
+
+.nav-login-register button:hover {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+
+}
+
+.nav-options button:hover {
+    color: #1a73e8;
+}
+
+/* Hero Section */
+.hero-container {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 3rem;
+    align-items: center;
+    background-color: #e8f0fe;
+    border-radius: 0.5rem;
+}
+
+.hero-left-section {
+    width: 60%;
+}
+
+.hero-left-section h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.hero-left-section p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.hero-left-section button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.hero-left-section button:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    max-height: 75vh;
+    border-radius: 0.5rem;
+}
+
+/* Features and Services Section */
+.features-container {
+    padding: 3rem;
+    background-color: #fff;
+    text-align: center;
+}
+
+.features-container h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.features-container p {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* About Us, Mission, Vision Section */
+.about-us {
+    padding: 3rem;
+    background-color: #f0f4f8;
+}
+
+.about-us h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: black;
+    margin-top: 2rem;
+}
+
+.about-us p {
+    font-size: 1rem;
+    color: #555;
+    max-width: 700px;
+    margin: 0 auto 2rem auto;
+}
+
+/* Footer Section */
+.footer {
+    background-color: black;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+    0% { opacity: 0; transform: translateX(-100px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    0% { opacity: 0; transform: translateX(100px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes buttonBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Overall Landing Page Container */
+.landing-page-container {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    animation: fadeIn 1.5s ease-out;
+}
+
+/* Navbar Animations */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 2s ease-out;
+}
+
+.nav-options button {
+    position: relative;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.5rem 1.2rem;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.nav-options button:hover::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: #1a73e8;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Hero Section Animations */
+.hero-container {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 3rem;
+    align-items: center;
+    background-color: #e8f0fe;
+    border-radius: 0.5rem;
+    animation: slideInRight 1.2s ease-out;
+}
+
+.hero-left-section h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    animation: fadeIn 1.8s ease-out;
+}
+
+.hero-left-section button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    animation: buttonBounce 1.5s infinite ease-in-out;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    max-height: 75vh;
+    border-radius: 0.5rem;
+    animation: slideInLeft 1.5s ease-out;
+}
+
+/* Features Section with Animation */
+.features-container {
+    padding: 3rem;
+    background-color: #fff;
+    text-align: center;
+    animation: fadeIn 1.2s ease-out;
+}
+
+.features-container p {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1rem;
+    color: #555;
+    animation: fadeIn 1.5s ease-out;
+}
+
+/* About Us Section Animation */
+.about-us {
+    padding: 3rem;
+    background-color: #f0f4f8;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.about-us h2, .about-us p {
+    animation: fadeIn 1.2s ease-out;
+    transform-origin: left;
+}
+
+/* Footer Section */
+.footer {
+    background-color: black;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+    0% { opacity: 0; transform: translateX(-100px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    0% { opacity: 0; transform: translateX(100px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes gradientBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes hoverUnderline {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+/* Overall Landing Page Container */
+.landing-page-container {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    animation: fadeIn 1.5s ease-out;
+}
+
+/* Navbar Animations */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 2s ease-out;
+}
+
+.nav-options button {
+    position: relative;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.5rem 1.2rem;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.nav-options button:hover::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: #1a73e8;
+    animation: hoverUnderline 0.3s ease;
+}
+
+/* Hero Section Animations */
+.hero-container {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 3rem;
+    align-items: center;
+    background: linear-gradient(-45deg, #e8f0fe, #d3e8fe, #b3d1fc, #d1e0fe);
+    background-size: 400% 400%;
+    animation: gradientBackground 15s ease infinite;
+    border-radius: 0.5rem;
+    animation: slideInRight 1.2s ease-out;
+}
+
+.hero-left-section h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    animation: fadeIn 1.8s ease-out;
+}
+
+.hero-left-section button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.hero-left-section button:hover {
+    background-color: #fff;
+    color: #1a73e8;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    max-height: 75vh;
+    border-radius: 0.5rem;
+    animation: slideInLeft 1.5s ease-out;
+}
+
+/* Features Section with Animation */
+.features-container {
+    padding: 3rem;
+    background-color: #fff;
+    text-align: center;
+    animation: fadeIn 1.2s ease-out;
+}
+
+.features-container p {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1rem;
+    color: #555;
+    animation: fadeIn 1.5s ease-out;
+}
+
+
+
+.about-us {
+    padding: 3rem;
+    background-color: #f0f4f8;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.about-us h2, .about-us p {
+    animation: fadeIn 1.2s ease-out;
+    transform-origin: left;
+}
+
+.about-us h2 {
+    position: relative;
+}
+
+.about-us h2::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 2px;
+    background-color: gray;
+    left: 0;
+    bottom: -5px;
+    animation: fadeIn 2s ease-out;
+}
+
+
+.footer {
+    background-color: black;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    justify-content: center;
+    gap: 2rem;
+    font-size: 0.9rem;
+    animation: fadeIn 1s ease-in-out;
+    display: flex;
+}
+
+
+

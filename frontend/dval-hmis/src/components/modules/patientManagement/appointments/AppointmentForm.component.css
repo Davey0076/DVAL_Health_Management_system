@@ -1,0 +1,19 @@
+select, .appointment-form input{
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.appointment-form label{
+    font-weight: 700;
+    padding-left: 1rem;
+    margin-top: 1rem;
+}
+
+.appointment-form button{
+    padding: 1rem 2rem 1rem 2rem;
+    width: fit-content;
+    margin-top: 2rem;
+}
+
+
+
